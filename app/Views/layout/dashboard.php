@@ -5,21 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIFAS  CHILAS  </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
     <style>
         :root {
             --sidebar-width: 260px;
             --sidebar-collapsed-width: 80px;
-            --bg-light: #f8f9fa;
-            --primary-color: #4e73df;
+            --bg-cream: #f6f1ea;
+            --ink: #1a1a1a;
+            --muted: #6e6a64;
+            --champagne: #d7c3a5;
+            --wine: #7a2e3a;
+            --card: rgba(255, 255, 255, 0.78);
+            --card-border: rgba(215, 195, 165, 0.45);
+            --shadow: 0 18px 40px rgba(26, 26, 26, 0.08);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
+            font-family: 'Sora', sans-serif;
+            background: radial-gradient(1200px circle at 90% -10%, #ffffff 0%, #f6f1ea 45%, #efe5d8 100%);
+            color: var(--ink);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 1px, transparent 1px, transparent 10px);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Wrapper */
@@ -27,15 +45,18 @@
             display: flex;
             width: 100%;
             align-items: stretch;
+            position: relative;
+            z-index: 1;
         }
 
         /* Sidebar Estilos */
         #sidebar {
             min-width: var(--sidebar-width);
             max-width: var(--sidebar-width);
-            background: #ffffff;
+            background: #fbf7f0;
             min-height: 100vh;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.03);
+            box-shadow: 8px 0 30px rgba(26, 26, 26, 0.06);
+            border-right: 1px solid var(--champagne);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
         }
@@ -51,25 +72,40 @@
             justify-content: space-between;
         }
 
+        .sidebar-header h4 {
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .sidebar-header h4 span {
+            color: var(--wine);
+        }
+
         .nav-link {
-            color: #6c757d;
+            color: var(--muted);
             font-weight: 500;
             padding: 12px 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin: 5px 15px;
             display: flex;
             align-items: center;
-            transition: all 0.2s;
+            border: 1px solid transparent;
+            transition: all 0.25s ease;
         }
 
         .nav-link i {
             font-size: 1.2rem;
             margin-right: 12px;
+            color: var(--wine);
         }
 
         .nav-link:hover, .nav-link.active {
-            background-color: #f0f4ff;
-            color: var(--primary-color);
+            background-color: rgba(215, 195, 165, 0.2);
+            border-color: var(--champagne);
+            color: var(--ink);
+            box-shadow: 0 8px 20px rgba(122, 46, 58, 0.08);
         }
 
         /* Contenido */
@@ -79,19 +115,80 @@
             transition: all 0.3s;
         }
 
-        .card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        #content h2,
+        #content h4,
+        #content h5 {
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.03em;
         }
+
+        .card {
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 26px 50px rgba(26, 26, 26, 0.12);
+        }
+
+        .row.g-4 > *:nth-child(-n+3) {
+            animation: rise 0.45s ease both;
+        }
+
+        .row.g-4 > *:nth-child(1) { animation-delay: 0.04s; }
+        .row.g-4 > *:nth-child(2) { animation-delay: 0.08s; }
+        .row.g-4 > *:nth-child(3) { animation-delay: 0.12s; }
 
         /* Botón de toggle hamburguesa */
         #sidebarCollapse {
-            background: white;
-            border: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: #ffffff;
+            border: 1px solid var(--champagne);
+            box-shadow: 0 6px 16px rgba(26, 26, 26, 0.08);
             border-radius: 8px;
             padding: 8px 12px;
+            color: var(--ink);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #sidebarCollapse:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 22px rgba(26, 26, 26, 0.12);
+        }
+
+        .btn-primary {
+            background-color: var(--wine);
+            border-color: var(--wine);
+            box-shadow: 0 10px 20px rgba(122, 46, 58, 0.18);
+        }
+
+        .btn-primary:hover {
+            background-color: #61232d;
+            border-color: #61232d;
+        }
+
+        .btn-warning {
+            background-color: var(--champagne);
+            border-color: var(--champagne);
+            color: var(--ink);
+        }
+
+        .badge {
+            border: 1px solid rgba(215, 195, 165, 0.6);
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive para móviles */

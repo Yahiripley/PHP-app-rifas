@@ -9,7 +9,7 @@ class BoletoModel extends Model
     protected $table = 'boletos';
     protected $primaryKey = 'id';
     protected $useSoftDeletes = false;
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $allowedFields = [
         'rifa_id',
         'numero_boleto',
